@@ -44,7 +44,7 @@ class AuthController extends Controller
         $credentials = $validator->valid();
 
         if (!Auth::attempt($credentials)) {
-            return response()->json(['errors' => 'credentials does not match'], 400);
+            return response()->json(['errors' => ['auth' => 'credentials does not match']], 400);
         }
 
         $user = Auth::user();
@@ -58,5 +58,10 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return response()->json(['message' => 'Logged out successfully'], 200);
+    }
+
+    public function user(Request $request)
+    {
+        return $request->user();
     }
 }

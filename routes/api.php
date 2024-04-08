@@ -25,7 +25,7 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 });
 
 //verification routes
-Route::middleware(['auth:sanctum'])->prefix('verify')->controller(VerificationController::class)->group(function () {
+Route::prefix('verify')->controller(VerificationController::class)->group(function () {
     Route::get('/{id}/{hash}', 'verify')->middleware(['signed'])->name('verification.verify');
-    Route::post('/resend', 'resend')->middleware(['throttle:6,1'])->name('verification.send');
+    Route::post('/resend', 'resend')->middleware(['throttle:6,1', 'auth:sanctum'])->name('verification.send');
 });

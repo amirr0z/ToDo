@@ -32,7 +32,7 @@ class TaskController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $validatedData = $request->validate();
+        $validatedData = $request->validated();
 
         $task = Auth::user()->tasks()->create($validatedData);
 
@@ -49,11 +49,24 @@ class TaskController extends Controller
      */
     public function update(UpdateRequest $request, Task $task)
     {
-        $validatedData = $request->validate();
+        $validatedData = $request->validated();
 
         $task->update($validatedData);
 
         return response()->json(['data' => $task, 'message' => 'Successfully updated task'], 200);
+    }
+
+    /**
+     * show the specified task for the authenticated user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Task  $task
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Task $task)
+    {
+        Gate::authorize('view', $task);
+        return response()->json(['data' => $task, 'message' => 'Successfully retrieved task'], 200);
     }
 
     /**

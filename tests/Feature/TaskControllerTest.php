@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Task;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,13 +17,20 @@ class TaskControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $this->actingAs($user);
+        $datetime = Carbon::now()->addDay();
 
         $response = $this->postJson('/api/tasks', [
-            'description' => 'Task 1',
+            'description' => 'desc 1',
+            'title' => 'Task 1',
+            'due_date' => $datetime,
         ]);
 
         $response->assertStatus(201);
-        $this->assertDatabaseHas('tasks', ['description' => 'Task 1']);
+        $this->assertDatabaseHas('tasks', [
+            'description' => 'desc 1',
+            'title' => 'Task 1',
+            'due_date' => $datetime,
+        ]);
     }
 
 
@@ -34,10 +42,13 @@ class TaskControllerTest extends TestCase
 
         $response = $this->putJson("/api/tasks/{$task->id}", [
             'description' => 'Updated Task',
+            'status' => 'failed',
         ]);
 
         $response->assertStatus(200);
-        $this->assertDatabaseHas('tasks', ['id' => $task->id, 'description' => 'Updated Task']);
+        $this->assertDatabaseHas('tasks', [
+            'id' => $task->id, 'description' => 'Updated Task', 'status' => 'failed',
+        ]);
     }
 
 

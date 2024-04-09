@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Task;
 
+use App\Rules\FutureDate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -22,7 +23,10 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'title' => 'nullable|string|max:255',
+            'due_date' => ['nullable', 'date', new FutureDate],
+            'status' => ['in:failed,completed,pending'],
         ];
     }
 }

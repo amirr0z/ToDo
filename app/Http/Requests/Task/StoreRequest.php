@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Task;
 
+use App\Rules\FutureDate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -23,6 +24,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'description' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'due_date' => ['nullable', 'date', new FutureDate],
         ];
     }
 }

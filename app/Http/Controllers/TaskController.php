@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Task\StoreRequest;
+use App\Http\Requests\Task\UpdateRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,11 +30,9 @@ class TaskController extends Controller
      * @LRDparam description required|string|max:255
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $validatedData = $request->validate([
-            'description' => 'required|string|max:255',
-        ]);
+        $validatedData = $request->validate();
 
         $task = Auth::user()->tasks()->create($validatedData);
 
@@ -47,13 +47,9 @@ class TaskController extends Controller
      * @LRDparam description required|string|max:32
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(UpdateRequest $request, Task $task)
     {
-        $validatedData = $request->validate([
-            'description' => 'required|string|max:255',
-        ]);
-
-        Gate::authorize('update', $task);
+        $validatedData = $request->validate();
 
         $task->update($validatedData);
 

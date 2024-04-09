@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->on('id')->refrence('users')->onDelete('cascade');
+            $table->string('title');
+            $table->enum('status', ['pending', 'completed'])->default('pending');
             $table->text('description');
             $table->timestamps();
         });

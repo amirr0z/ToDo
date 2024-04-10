@@ -352,9 +352,9 @@
                                 "type": "object",
                                 "properties": {
                                     "description": {
-                                        "type": "object",
+                                        "type": "string",
                                         "nullable": false,
-                                        "format": "object"
+                                        "format": "string"
                                     },
                                     "title": {
                                         "type": "string",
@@ -732,13 +732,13 @@
                                 "type": "object",
                                 "properties": {
                                     "description": {
-                                        "type": "object",
+                                        "type": "string",
                                         "nullable": false,
-                                        "format": "object"
+                                        "format": "string"
                                     },
                                     "title": {
                                         "type": "string",
-                                        "nullable": true,
+                                        "nullable": false,
                                         "format": "string"
                                     },
                                     "due_date": {
@@ -1327,9 +1327,9 @@
                                         "format": "string"
                                     },
                                     "password": {
-                                        "type": "object",
+                                        "type": "string",
                                         "nullable": false,
-                                        "format": "object"
+                                        "format": "string"
                                     }
                                 }
                             }
@@ -1452,19 +1452,19 @@
                                 "type": "object",
                                 "properties": {
                                     "name": {
-                                        "type": "object",
+                                        "type": "string",
                                         "nullable": false,
-                                        "format": "object"
+                                        "format": "string"
                                     },
                                     "email": {
-                                        "type": "object",
+                                        "type": "string",
                                         "nullable": false,
-                                        "format": "object"
+                                        "format": "string"
                                     },
                                     "password": {
-                                        "type": "object",
+                                        "type": "string",
                                         "nullable": false,
-                                        "format": "object"
+                                        "format": "string"
                                     }
                                 }
                             }

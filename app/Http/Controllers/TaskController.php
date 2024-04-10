@@ -28,7 +28,6 @@ class TaskController extends Controller
      * Store a newly created task for the authenticated user.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @LRDparam description required|string|max:255
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
@@ -45,7 +44,6 @@ class TaskController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Task  $task
-     * @LRDparam description required|string|max:32
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request, Task $task)

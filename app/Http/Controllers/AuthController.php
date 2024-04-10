@@ -19,9 +19,6 @@ class AuthController extends Controller
      * Register new user.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @LRDparam name required|string|max:255
-     * @LRDparam email required|string|email|unique:users,email
-     * @LRDparam password required|string|min:6
      * @return \Illuminate\Http\Response
      */
     public function register(RegisterRequest $request)
@@ -45,8 +42,6 @@ class AuthController extends Controller
      * Login user with credentials.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @LRDparam email required|string|email
-     * @LRDparam password required|string|min:6
      * @return \Illuminate\Http\Response
      */
     public function login(LoginRequest $request)

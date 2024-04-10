@@ -24,7 +24,7 @@ class Task extends Model
     protected function dueDate(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => Carbon::parse($value),
+            set: fn ($value) => isset($value) ? Carbon::parse($value) : null,
         );
     }
 }

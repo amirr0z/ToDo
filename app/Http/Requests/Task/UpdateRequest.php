@@ -23,8 +23,8 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => 'nullable|string|max:255',
-            'title' => 'nullable|string|max:255',
+            'description' => 'string|max:255',
+            'title' => 'string|max:255',
             'due_date' => ['nullable', 'date', new FutureDate],
             'status' => ['in:failed,completed,pending'],
         ];

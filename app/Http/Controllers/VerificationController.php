@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendVerificationEmail;
 use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -46,8 +47,9 @@ class VerificationController extends Controller
         //check if veirfied
         if ($request->user()->hasVerifiedEmail())
             return response()->json(['message' => 'Already verified!'], 400);
-        //mail
-        $request->user()->sendEmailVerificationNotification();
+        // Dispatch SendVerificationEmail job
+        SendVerificationEmail::dispatch($request->user());
+
         return response()->json(['message' => 'Verification email sent successfully'], 200);
     }
 }

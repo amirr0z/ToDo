@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Jobs\SendVerificationEmail;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class AuthController extends Controller
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        event(new Registered($user)); // Send verification email
+        // Dispatch SendVerificationEmail job
+        SendVerificationEmail::dispatch($user);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 

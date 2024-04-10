@@ -15,11 +15,12 @@ class TaskController extends Controller
     /**
      * Display a listing of the tasks for the authenticated user.
      *
+     * @LRDparam page integer
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $tasks = Auth::user()->tasks()->latest()->get();
+        $tasks = Auth::user()->tasks()->latest()->paginate(10);
         return response()->json(['data' => $tasks, 'message' => 'Successfully retrieved data']);
     }
 

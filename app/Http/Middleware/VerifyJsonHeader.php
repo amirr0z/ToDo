@@ -26,8 +26,8 @@ class VerifyJsonHeader
 
         //     return response()->json(['error' => 'Unsupported Media Type. Please send JSON and add Accept header with application/json value.'], 415);
         // }
-        $request->header('Accept', 'application/json');
-        $request->header('Content-Type', 'application/json');
+        $request->headers->set('Accept', 'application/json');
+        // $request->headers->set('Content-Type', 'application/json');
         return $next($request);
     }
 }
